@@ -1,5 +1,5 @@
 [package]
-name = "taurios"
+name = "tauriOS"
 version = "0.1.0"
 authors = ["Ruben Paz <me@ruben.io>"]
 edition = "2018"
