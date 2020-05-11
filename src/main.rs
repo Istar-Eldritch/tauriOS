@@ -1,10 +1,7 @@
-
 #![no_std]
 #![no_main]
-
 #![feature(asm)]
 #![feature(custom_test_frameworks)]
-
 #![test_runner(crate::tests::test_runner)]
 #![reexport_test_harness_main = "test_main"]
 
@@ -12,15 +9,15 @@
 
 #[cfg(test)]
 mod qemu;
-mod vga_buffer;
 mod serial;
+mod vga_buffer;
 
+#[cfg(not(test))]
+use core::fmt::Write;
 #[cfg(test)]
 use qemu::{exit_qemu, QemuExitCode};
 #[cfg(not(test))]
-use vga_buffer::{Writer, ColorCode, Color};
-#[cfg(not(test))]
-use core::fmt::Write;
+use vga_buffer::{Color, ColorCode, Writer};
 
 use core::panic::PanicInfo;
 

@@ -1,14 +1,11 @@
-
 use core::fmt;
-use volatile::Volatile;
 use lazy_static::lazy_static;
 use spin::Mutex;
+use volatile::Volatile;
 
 lazy_static! {
-    pub static ref WRITER: Mutex<Writer> = Mutex::new(Writer::new(ColorCode::new(
-        Color::White,
-        Color::Black
-    )));
+    pub static ref WRITER: Mutex<Writer> =
+        Mutex::new(Writer::new(ColorCode::new(Color::White, Color::Black)));
 }
 
 #[macro_export]
@@ -82,7 +79,6 @@ pub struct Writer {
 }
 
 impl Writer {
-
     pub fn new(color_code: ColorCode) -> Self {
         Writer {
             column_position: 0,
@@ -141,14 +137,12 @@ impl Writer {
                 // not part of printable ASCII range
                 _ => self.write_byte(0xfe),
             }
-
         }
     }
 }
 
 impl fmt::Write for Writer {
     fn write_str(&mut self, s: &str) -> fmt::Result {
-        
         self.write_string(s);
         Ok(())
     }
